@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Stopwatch</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-stopwatch"></i>
+                <h1>Pro Stopwatch</h1>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <!-- Main Stopwatch Card -->
+        <div class="stopwatch-card">
+            <!-- Time Display -->
+            <div class="time-display">
+                <div class="time-wrapper">
+                    <span class="time" id="hours">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <span class="colon">:</span>
+                <div class="time-wrapper">
+                    <span class="time" id="minutes">00</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <span class="colon">:</span>
+                <div class="time-wrapper">
+                    <span class="time" id="seconds">00</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+                <span class="colon">:</span>
+                <div class="time-wrapper">
+                    <span class="time milliseconds" id="milliseconds">00</span>
+                    <span class="time-label">MS</span>
+                </div>
+            </div>
+
+            <!-- Progress Ring -->
+            <div class="progress-ring">
+                <svg width="200" height="200">
+                    <circle class="progress-ring-circle-bg" cx="100" cy="100" r="90"></circle>
+                    <circle class="progress-ring-circle" id="progressCircle" cx="100" cy="100" r="90"></circle>
+                </svg>
+                <div class="progress-text" id="progressText">Ready</div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="controls">
+                <button class="btn btn-start" id="startBtn">
+                    <i class="fas fa-play"></i>
+                    <span>Start</span>
+                </button>
+                <button class="btn btn-pause" id="pauseBtn" disabled>
+                    <i class="fas fa-pause"></i>
+                    <span>Pause</span>
+                </button>
+                <button class="btn btn-reset" id="resetBtn">
+                    <i class="fas fa-redo"></i>
+                    <span>Reset</span>
+                </button>
+                <button class="btn btn-lap" id="lapBtn" disabled>
+                    <i class="fas fa-flag"></i>
+                    <span>Lap</span>
+                </button>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats" id="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Laps</span>
+                    <span class="stat-value" id="totalLaps">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Fastest Lap</span>
+                    <span class="stat-value" id="fastestLap">--:--:--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Slowest Lap</span>
+                    <span class="stat-value" id="slowestLap">--:--:--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Average Lap</span>
+                    <span class="stat-value" id="averageLap">--:--:--</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lap Times Section -->
+        <div class="lap-section" id="lapSection">
+            <div class="lap-header">
+                <h2>
+                    <i class="fas fa-list"></i>
+                    Lap Times
+                </h2>
+                <button class="btn-clear" id="clearLapsBtn">
+                    <i class="fas fa-trash"></i>
+                    Clear All
+                </button>
+            </div>
+            <div class="lap-list" id="lapList">
+                <div class="no-laps">
+                    <i class="fas fa-flag-checkered"></i>
+                    <p>No lap times recorded yet</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with <i class="fas fa-heart"></i> using HTML, CSS & JavaScript</p>
+        </footer>
+    </div>
+
+    <!-- Sound Effects (Optional) -->
+    <audio id="startSound" src="" preload="auto"></audio>
+    <audio id="lapSound" src="" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
