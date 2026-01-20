@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <h1>Tic-Tac-Toe</h1>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="sound-toggle" id="soundToggle">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Game Mode Selection -->
+        <div class="mode-selection" id="modeSelection">
+            <h2>Select Game Mode</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn" data-mode="pvp">
+                    <i class="fas fa-users"></i>
+                    <span>Player vs Player</span>
+                    <p>Play with a friend</p>
+                </button>
+                <button class="mode-btn" data-mode="pvc">
+                    <i class="fas fa-robot"></i>
+                    <span>Player vs AI</span>
+                    <p>Challenge the computer</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- Difficulty Selection (for AI mode) -->
+        <div class="difficulty-selection hidden" id="difficultySelection">
+            <h2>Select Difficulty</h2>
+            <div class="difficulty-buttons">
+                <button class="diff-btn" data-difficulty="easy">
+                    <i class="fas fa-smile"></i>
+                    <span>Easy</span>
+                </button>
+                <button class="diff-btn" data-difficulty="medium">
+                    <i class="fas fa-meh"></i>
+                    <span>Medium</span>
+                </button>
+                <button class="diff-btn" data-difficulty="hard">
+                    <i class="fas fa-brain"></i>
+                    <span>Hard</span>
+                </button>
+            </div>
+            <button class="back-btn" id="backToMode">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-container hidden" id="gameContainer">
+            <!-- Score Board -->
+            <div class="scoreboard">
+                <div class="score-item player-x">
+                    <div class="score-icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="score-info">
+                        <span class="score-label" id="playerXLabel">Player X</span>
+                        <span class="score-value" id="scoreX">0</span>
+                    </div>
+                </div>
+                <div class="score-item draws">
+                    <div class="score-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="score-info">
+                        <span class="score-label">Draws</span>
+                        <span class="score-value" id="scoreDraw">0</span>
+                    </div>
+                </div>
+                <div class="score-item player-o">
+                    <div class="score-icon">
+                        <i class="far fa-circle"></i>
+                    </div>
+                    <div class="score-info">
+                        <span class="score-label" id="playerOLabel">Player O</span>
+                        <span class="score-value" id="scoreO">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Turn Display -->
+            <div class="turn-display" id="turnDisplay">
+                <i class="fas fa-times"></i>
+                <span>Player X's Turn</span>
+            </div>
+
+            <!-- Game Board -->
+            <div class="board" id="board">
+                <div class="cell" data-cell-index="0"></div>
+                <div class="cell" data-cell-index="1"></div>
+                <div class="cell" data-cell-index="2"></div>
+                <div class="cell" data-cell-index="3"></div>
+                <div class="cell" data-cell-index="4"></div>
+                <div class="cell" data-cell-index="5"></div>
+                <div class="cell" data-cell-index="6"></div>
+                <div class="cell" data-cell-index="7"></div>
+                <div class="cell" data-cell-index="8"></div>
+                <div class="winning-line" id="winningLine"></div>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <button class="control-btn restart-btn" id="restartBtn">
+                    <i class="fas fa-redo"></i>
+                    <span>Restart Game</span>
+                </button>
+                <button class="control-btn reset-btn" id="resetBtn">
+                    <i class="fas fa-trophy"></i>
+                    <span>Reset Score</span>
+                </button>
+                <button class="control-btn menu-btn" id="menuBtn">
+                    <i class="fas fa-home"></i>
+                    <span>Main Menu</span>
+                </button>
+            </div>
+
+            <!-- Game Statistics -->
+            <div class="statistics">
+                <div class="stat-item">
+                    <span class="stat-label">Total Games</span>
+                    <span class="stat-value" id="totalGames">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Win Rate X</span>
+                    <span class="stat-value" id="winRateX">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Win Rate O</span>
+                    <span class="stat-value" id="winRateO">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Modal -->
+        <div class="modal hidden" id="resultModal">
+            <div class="modal-content">
+                <div class="modal-icon" id="modalIcon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2 id="resultTitle">Player X Wins!</h2>
+                <p id="resultMessage">Congratulations on your victory!</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn play-again" id="playAgainBtn">
+                        <i class="fas fa-play"></i>
+                        Play Again
+                    </button>
+                    <button class="modal-btn main-menu" id="modalMenuBtn">
+                        <i class="fas fa-home"></i>
+                        Main Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with <i class="fas fa-heart"></i> using HTML, CSS & JavaScript</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
